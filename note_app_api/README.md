@@ -32,7 +32,3 @@ A FastAPI-based API to manage notes with file system support.
 ## File System Support
 * Notes are stored in a `notes` directory
 * Each note is stored in a separate file with a `.txt` extension
-
-Added basic API endpoints and data storage
-* Updated error handling: Added try-except blocks for error handling
-* Refactored code: Improved code organization and readability
