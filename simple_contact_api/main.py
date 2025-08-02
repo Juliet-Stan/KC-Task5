@@ -1,12 +1,22 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr, field_validator
+import re
 
 app = FastAPI()
 
 class Contact(BaseModel):
     name: str
     phone: str
-    email: str
+    email: EmailStr
+
+    @field_validator('phone')
+    def validate_phone_number(cls, v: str) -> str:
+        # A simple regex for a 10-15digit phone number
+        phone_regex = re.compile(r'^\+?[\d\s()-]{10,15}$')
+        
+        if not phone_regex.match(v):
+            raise ValueError('Invalid phone number format. Please use a valid 10-digit number.')
+        return v
 
 contacts = {}
 
