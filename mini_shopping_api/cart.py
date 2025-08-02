@@ -1,16 +1,24 @@
 import json
 import math
+from product import Product
 
 class Cart:
-    def __init__(self):
+    def _init_(self):
         self.products = {}
 
-    def add_product(self, product_id, quantity):
+    def add_product(self, product_id: int, quantity: int):
+        
         if product_id in self.products:
             self.products[product_id]['quantity'] += quantity
         else:
-            self.products[product_id] = {'quantity': quantity}
-
+           
+            self.products[product_id] = {
+                'id': product_id,
+                'name': f"Product {product_id}",
+                'price': 0.0,
+                'quantity': quantity
+            }
+        
     def checkout(self):
         total = 0
         for product in self.products.values():
